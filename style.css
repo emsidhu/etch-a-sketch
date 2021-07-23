@@ -1,0 +1,8 @@
+#container {
+    display: grid;
+    width:  900px;
+    height: 900px;
+    border: 2px solid black;
+    justify-content: stretch;
+    margin: auto;
+}
