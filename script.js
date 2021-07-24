@@ -1,4 +1,6 @@
-function createGrid(size) {
+let size = 16
+
+function createGrid() {
     
     let container = document.querySelector("#container");
     
@@ -12,10 +14,37 @@ function createGrid(size) {
         let square = document.createElement("div");
         square.style.cssText = `border: ${borderWidth}px solid black; width: ${squareWidth}px;
             height: ${squareHeight}px;`
-        square.classList.add("square")
+        square.classList.toggle("square")
         container.appendChild(square)
-    }
-    
+        square.addEventListener("mouseover", (e) => {
+            square.style.cssText = "background-color: black;"
+        })
+    }  
 }
 
-createGrid(16)
+function resetGrid() {
+    let squares = document.querySelectorAll(".square")
+
+    squares.forEach(square => {
+        square.classList.toggle("square")
+        square.remove()
+    })
+
+    createGrid()
+}
+
+function changeGrid() {
+    size = parseInt(prompt("Choose a new grid size. Example: Typing 16 will make a 16x16 grid (max 100x100)"))
+    console.log(size)
+    while (size > 100 || Number.isNaN(size)) {
+        if (size > 100) {
+            size = prompt("Chosen grid size is too large, please choose a smaller size")
+        } else {
+            size = prompt("Invalid size, please choose a new grid size (max 100x100)")
+        }
+    }
+    resetGrid()
+}
+
+
+createGrid()
